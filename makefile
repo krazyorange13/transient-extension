@@ -24,4 +24,4 @@ clean:
 
 build: $(OBJ_FILES)
 	ar -rcs build/libtransientextension.a $(OBJ_FILES)
-	cp src/*.h build/libtransientextension/
+	cp src/*.h build/transientextension/
