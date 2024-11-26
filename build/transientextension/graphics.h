@@ -3,6 +3,12 @@
 
 #include "transientfoundation/transientfoundation.h"
 
+#include "font.h"
+
+void window_draw_text
+(window *win, char *text, window_coord_t x, window_coord_t y, color_t c);
+void window_draw_char
+(window *win, char ch, window_coord_t x, window_coord_t y, color_t c);
 void window_draw_line
 (window *win, window_coord_t x1, window_coord_t y1, window_coord_t x2, window_coord_t y2, color_t c);
 void window_draw_rect

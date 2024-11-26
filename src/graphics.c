@@ -1,4 +1,36 @@
+#include <string.h>
+
 #include "graphics.h"
+
+void window_draw_text
+(window *win, char *text, window_coord_t x, window_coord_t y, color_t c)
+{
+    size_t len = strlen(text);
+    for (size_t i = 0; i < len; i++)
+    {
+        window_coord_t _x = x + i * (FONT_WIDTH + 1);
+        window_coord_t _y = y;
+        window_draw_char(win, text[i], _x, _y, c);
+    }
+}
+
+void window_draw_char
+(window *win, char ch, window_coord_t x, window_coord_t y, color_t c)
+{
+    uint8_t glyph_i = FONT_CTOG_I(ch);
+    if (glyph_i > FONT_GLYPH_COUNT - 1) return;
+    glyph_t glyph = FONT_GLYPHS[glyph_i];
+    for (uint8_t i = 0; i < FONT_WIDTH * FONT_HEIGHT; i++)
+    {
+        glyph_t glyph_bit = (glyph >> ((FONT_WIDTH * FONT_HEIGHT - 1) - i)) & 1;
+        if (glyph_bit)
+        {
+            window_coord_t _x = x + (i % FONT_WIDTH);
+            window_coord_t _y = y + (i / FONT_HEIGHT);
+            window_set_pixel(win, _x, _y, c);
+        }
+    }
+}
 
 // uses a scuffed implementation of bresenham's algorithm
 void window_draw_line
