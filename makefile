@@ -23,5 +23,6 @@ clean:
 	rm -rf libtransientextension.a
 
 build: $(OBJ_FILES)
+	mkdir -p build
 	ar -rcs build/libtransientextension.a $(OBJ_FILES)
 	cp src/*.h build/transientextension/
