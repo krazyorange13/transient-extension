@@ -8,6 +8,7 @@ int main()
     vec2 w = get_console_size();
     window *win;
     create_window(&win, w.y, w.x);
+    struct termios conf = terminal_conf_save();
     hide_cursor();
     raw_mode_enable();
     window_fill_color(win, COLOR_BLACK);
@@ -19,4 +20,5 @@ int main()
     show_cursor();
     reset_cursor();
     erase_screen();
+    terminal_conf_load(conf);
 }
